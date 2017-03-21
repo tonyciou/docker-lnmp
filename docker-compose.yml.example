@@ -1,0 +1,31 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - /MY_WEB_DIR/:/media/web
+      - ./nginx/conf.d/:/etc/nginx/conf.d:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - fpm:fpm
+  fpm:
+    build: ./php-fpm
+    ports:
+      - "9000"
+    volumes:
+      - /MY_WEB_DIR/:/media/web
+      - ./php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
+    env_file:
+      - /MY_WEB_DIR/.env
+    links:
+      - mysql
+  mysql:
+    image: "mysql:5.5"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/data:/var/lib/mysql
+    env_file:
+      - ./db/config.env

@@ -8,6 +8,8 @@ services:
       - /MY_WEB_DIR/:/media/web
       - ./nginx/conf.d/:/etc/nginx/conf.d:ro
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    environment:
+      TZ: "Asia/Taipei"
     links:
       - fpm:fpm
   fpm:
@@ -19,6 +21,8 @@ services:
       - ./php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
     env_file:
       - /MY_WEB_DIR/.env
+    environment:
+      TZ: "Asia/Taipei"
     links:
       - mysql
   mysql:
@@ -30,3 +34,5 @@ services:
       - ./db/my.cnf:/etc/mysql/my.cnf:ro
     env_file:
       - ./db/config.env
+    environment:
+      TZ: "Asia/Taipei"

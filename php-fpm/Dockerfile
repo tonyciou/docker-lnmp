@@ -14,3 +14,5 @@ RUN pecl install xdebug
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
+
+WORKDIR /media/web

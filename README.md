@@ -1,5 +1,5 @@
 # docker-lnmp
-Building Lnmp Development Environments Using Docker
+Building LNMP Development Environments Using Docker
 
 # Requirement
 
